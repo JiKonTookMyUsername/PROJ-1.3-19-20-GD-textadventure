@@ -61,6 +61,8 @@ treasureImages = [];
 treasureImages[1] = "MarineToy1.png";
 treasureImages[3] = "MarineToy2.png";
 
+inventoryTreasures=[];
+
 myInput.addEventListener('keydown', getInput, false);
 
 function getInput(evt) {
@@ -111,7 +113,41 @@ function getInput(evt) {
   }
 }
 
+// if(inputArray[0] == "pak") {
+//   console.log('ga wat pakken');
+//   myInput.value = "";
+//   if (treasureAanwezig){
+//     console.log('schat gepakt');
+//     pakTreasure(currentLocation);
+//     giveLocation();
+//   }
+// }
+//
+// function pakTreasure(currentLocation){
+//   inventoryTreasures.push(treasure[currentLocation]);
+//   treasures[currentLocation] = "";
+//   giveLocation();
+// }
+//
+// function checkTreasure(currentLocation){
+//   if(typeof treasures[currentLocation] != "undefind" && treasures[currentLocation] != ""){
+//     console.log(treasures[currentLocation]);
+//     treasure.src = "treasures/" + treasureImages[currentLocation];
+//     let treasureText = "<br><h4>In deze ruimte is een voorwerp aanwezig: " + treasures[currentLocation] + "</h4><br>";
+//     treasureAanwezig = true;
+//     return treasureText;
+//   }
+//   else{
+//     treasure.src = "";
+//     treasureAanwezig = false;
+//     return "";
+//   }
+// }
+
+
+
 function giveLocation() {
+  showTreasure(currentLocation);
   divLocation.innerHTML = locations[currentLocation] + " => grid " + currentLocation;
   myDescription.innerHTML = descriptions[currentLocation];
   imageLocation.src = "media/" + images[currentLocation];
@@ -119,10 +155,25 @@ function giveLocation() {
   for (let i = 0; i < directions[currentLocation].length; i++) {
     myDirections += "<li>" + directions[currentLocation][i] + "</li>";
   }
+
+
+  myDirections += checkTreasure(currentLocation);
   myPossibilities.innerHTML = myDirections;
-  myInventory.innerHTML = "uw inventory is leeg";
-  showTreasure(currentLocation);
+
+  // inventory checker
+  if(inventoryTreasures.length > 0){
+    myInventory.innerHTML = "These are your collectables: ";
+    inventoryTreasures.forEach(showInventory);
+    function showInventory(item , index ){
+      myInventory.innerHTML += "<li>" + item + "</li>";
+    }
+  }
+  else {
+    myInventory.innerHTML = "You have no collectables :(";
+  }
+
 }
+
 
 function showTreasure(currentLocation){
   if(typeof treasures[currentLocation] != "undefind"){
@@ -130,6 +181,12 @@ function showTreasure(currentLocation){
     treasure.src = "treasures/" + treasureImages[currentLocation];
   }
 }
+
+
+
+
+
+
 
 function removeFeedback() {
   feedback.innerHTML = "";
