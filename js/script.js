@@ -103,7 +103,7 @@ function getInput(evt) {
 }
 
 function giveLocation() {
-  divLocation.innerHTML = locations[currentLocation];
+  divLocation.innerHTML = locations[currentLocation] + " => grid " + currentLocation;
   myDescription.innerHTML = descriptions[currentLocation];
   imageLocation.src = "media/" + images[currentLocation];
   myDirections = "mogelijke richtingen zijn: ";
