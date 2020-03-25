@@ -3,6 +3,7 @@ body{
 }
 
 .container{
+  position: relative;
   width: 600px;
   margin: auto;
   background-color: aliceblue;
@@ -16,4 +17,11 @@ body{
   color: red;
   font-size: 30px;
   font-weight: bold;
+}
+
+
+.treasure{
+  position: absolute;
+  left: 50px;
+  top: 150px;
 }

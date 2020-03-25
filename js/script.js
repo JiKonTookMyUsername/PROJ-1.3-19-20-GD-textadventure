@@ -5,6 +5,7 @@ const feedback = document.getElementById('feedback');
 const imageLocation = document.getElementById('imageLocation');
 const myDescription = document.getElementById('description');
 const myInventory = document.getElementById('inventory');
+const treasure = document.getElementById('treasure');
 
 let currentLocation = 4;
 
@@ -51,6 +52,14 @@ descriptions[5] = "u staat in het medialab. Hier kan geexperimenteerd worden met
 descriptions[6] = "u staat bij de toiletten";
 descriptions[7] = "u staat in een klaslokaal. De tafels staan recht achter elkaar en voorin is een projector en een smartboard";
 descriptions[8] = "u staat in het examenlokaal. Hier zijn de vierdejaars studenten bezig met het voorbereiden van hun examen";
+
+treasures = [];
+treasures[1] = "Maringe Toy 1";
+treasure[3] = "Marine Toy 2";
+
+treasureImages = [];
+treasureImages[1] = "MarineToy1.png";
+treasureImages[3] = "MarineToy2.png";
 
 myInput.addEventListener('keydown', getInput, false);
 
@@ -112,6 +121,14 @@ function giveLocation() {
   }
   myPossibilities.innerHTML = myDirections;
   myInventory.innerHTML = "uw inventory is leeg";
+  showTreasure(currentLocation);
+}
+
+function showTreasure(currentLocation){
+  if(typeof treasures[currentLocation] != "undefind"){
+    console.log(treasures[currentLocation]);
+    treasure.src = "treasures/" + treasureImages[currentLocation];
+  }
 }
 
 function removeFeedback() {
