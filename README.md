@@ -14,6 +14,6 @@ gamedeveloper - Jim Koning
 |<img width=500/>|<img width=300/>|
 
 
-   [LiveDemo]: <http://sjo.hosts.ma-cloud.nl/2018_2019/PROJ-1.3-19-20-GD-textadventure/>
+   [LiveDemo]: <http://25800.hosts2.ma-cloud.nl/bewijzenmap/periode1.3/proj/PROJ-1.3-19-20-GD-textadventure/>
    [Design]: <docs/design.png>
    [Map]:<docs/map.png>
