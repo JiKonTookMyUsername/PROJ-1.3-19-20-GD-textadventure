@@ -176,7 +176,7 @@ function giveLocation() {
 
 
 function showTreasure(currentLocation){
-  if(typeof treasures[currentLocation] != "undefind"){
+  if(typeof treasures[currentLocation] != "undefined"){
     console.log(treasures[currentLocation]);
     treasure.src = "treasures/" + treasureImages[currentLocation];
   }
