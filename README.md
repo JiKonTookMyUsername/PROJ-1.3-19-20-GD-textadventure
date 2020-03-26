@@ -1,9 +1,5 @@
 ## MaQuest
 gamedeveloper - Jim Koning
-
-### Korte omschrijving van de game
-...
-
 ---
 #### Producten Werkproces
 | Product  | Link |
