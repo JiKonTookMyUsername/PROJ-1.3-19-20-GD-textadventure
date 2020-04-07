@@ -42,8 +42,8 @@ directions[0]
 directions[1] = ["path"];
 directions[2] = ["path"];
 directions[3] = ["path"];
-directions[4] = ["backwards", "forwards"];
-directions[5] = ["backwards", "forwards"];
+directions[4] = ["backward", "forward"];
+directions[5] = ["backward", "forward"];
 directions[6] = ["pinky"];
 
 
@@ -131,24 +131,9 @@ function giveLocation() {
     myInventory.innerHTML = "<br>Extra: find a cool toy. ";
   }
 
-  // moet misschien weg
   showTreasure(currentLocation);
   
 }
-
-
-// added if statement 
-// if (inputArray[0] == "pak") {
-//   console.log('Collect something');
-//   myInput.value ="";
-//   if (treasureAanwezig){
-//     console.log('treasure collected')
-
-//     pakTreasure(currentLocation);
-//     giveLocation();
-//   }
-// }
-
 
 // added function
 function pakTreasure(currentLocation){
