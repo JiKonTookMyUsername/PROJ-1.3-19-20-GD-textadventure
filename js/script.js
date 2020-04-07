@@ -10,56 +10,51 @@ const treasure = document.getElementById('treasure');
 let currentLocation = 4;
 
 let locations = [];
-locations[0] = "kantine";
-locations[1] = "trap";
-locations[2] = "eind";
-locations[3] = "docentenkamer";
-locations[4] = "gang";
-locations[5] = "medialab";
-locations[6] = "toiletten";
-locations[7] = "klaslokaal";
-locations[8] = "examenlokaal";
+locations[0] = "Ending";
+locations[1] = "The elevator";
+locations[2] = "Now, that's a cool toy";
+locations[3] = "Shiny shotgun";
+locations[4] = "Welcome, doomguy";
+locations[5] = "First encounter";
+locations[6] = "Too soon";
+
 
 images = [];
-images[0] = "room0.png";
-images[1] = "room1.jpg";
-images[2] = "room2.jpg";
-images[3] = "room3.jpg";
-images[4] = "room_4.png";
-images[5] = "room5.jpg";
-images[6] = "room6.jpg";
-images[7] = "room7.jpg";
-images[8] = "room8.jpg";
+images[0] = "ending.png";
+images[1] = "elevator.png";
+images[2] = "find_toy.png";
+images[3] = "shotgun_received.png";
+images[4] = "starting_point.png";
+images[5] = "first_forward.png";
+images[6] = "bad_ending.png";
+
 
 treasures = [];
-treasures[1] = "Treasure chest";
+treasures[2] = "cool toy";
 
 treasureImages = [];
-treasureImages[1] = "chest.png";
+treasureImages[2] = "cool_toy.png";
 
 inventoryTreasures = [];
 
 directions = [];
-directions[0] = ["oost"];
-directions[1] = ["west", "zuid"];
-directions[2] = ["zuid"];
-directions[3] = ["oost"];
-directions[4] = ["noord", "west", "zuid"];
-directions[5] = ["zuid"];
-directions[6] = ["oost"];
-directions[7] = ["noord", "west", "oost"];
-directions[8] = ["noord", "west"];
+directions[0] 
+directions[1] = ["path"];
+directions[2] = ["path"];
+directions[3] = ["path"];
+directions[4] = ["backwards", "forwards"];
+directions[5] = ["backwards", "forwards"];
+directions[6] = ["pinky"];
+
 
 descriptions = [];
-descriptions[0] = "u staat in een kantine. Hier zitten studenten te eten of computerspelletjes te doen";
-descriptions[1] = "u staat op een trap naar de eerste etage. Om u heen lopen studenten omhoog en omlaag";
-descriptions[2] = "u heeft gewonnen";
-descriptions[3] = "u staat in de lerarenkamer. De leraren eten hier hun lunch of drinken koffie of thee";
-descriptions[4] = "u staat in een gang. Studenten en leraren lopen richting de klaslokalen";
-descriptions[5] = "u staat in het medialab. Hier kan geexperimenteerd worden met bijvoorbeeld virtual reality brillen";
-descriptions[6] = "u staat bij de toiletten";
-descriptions[7] = "u staat in een klaslokaal. De tafels staan recht achter elkaar en voorin is een projector en een smartboard";
-descriptions[8] = "u staat in het examenlokaal. Hier zijn de vierdejaars studenten bezig met het voorbereiden van hun examen";
+descriptions[0] = "<strong>You arrived at Pinky's area, with a cool toy and shotgun.<br> You completed your mission by finishing off Pinky. ";
+descriptions[1] = "<strong>You're walking to the elevator that brings you to Pinky";
+descriptions[2] = "<strong>You are proudly walking with your hard earned shotgun towards Pinky<br>Something shines in the left corner of your eye...it's a cool toy!<br>You should definetly pick it up.";
+descriptions[3] = "<strong>Good<br> You have found the shotgun, all you need is a cool toy.";
+descriptions[4] = "<strong>You have only 1 objective: KILL THE LAST PINKY (with a shotgun) <br> NOTE: You have to find a shotgun in order to kill the last Pinky.";
+descriptions[5] = "<strong>You meet 2 soldiers guarding the hallway, you put them out of their misery.";
+descriptions[6] = "<strong>You arrived sooner than expected <br> Even Pinky is suprised you arrived this soon. <br> You didn't bring a shotgun with you thus can't you finish off Pinky <br> Good guy Pinky wants to give you a second chance, all you have to do is say please";
 
 myInput.addEventListener('keydown', getInput, false);
 
@@ -67,24 +62,26 @@ function getInput(evt) {
   if (evt.key == "Enter") {
     let inputArray = myInput.value.split(" ");
 
-    if (inputArray[0] == "ga") {
+    if (inputArray[0] == "path" || "please" || "pickup") {
       if (directions[currentLocation].indexOf(inputArray[1]) != -1) {
         switch (inputArray[1]) {
-          case "noord":
-            currentLocation -= 3;
-            break;
-          case "zuid":
-            currentLocation += 3;
-            break;
-          case "oost":
-            currentLocation += 1;
-            break;
-          case "west":
+          case "backwards":
             currentLocation -= 1;
             break;
+          case "forwards":
+            currentLocation += 1;
+            break;
+            case "pinky":
+              currentLocation -= 3;
+            break;
+            case "path":
+              currentLocation -= 1;
+            break;
+            case "pickup":
+              currentLocation;
         }
       } else {
-        feedback.innerHTML = "dat mag niet";
+        feedback.innerHTML = "nice";
         setTimeout(removeFeedback, 2000);
 
       }
@@ -92,24 +89,19 @@ function getInput(evt) {
       myInput.value = "";
     }
 
-    if (inputArray[0] == "pak") {
-      console.log('ga wat pakken');
+    if (inputArray[0] == "pickup") {
+      console.log('You found a cool toy');
       myInput.value = "";
       if (treasureAanwezig){
-        console.log('treasure collected')
+        console.log('Picked up cool toy')
     
         pakTreasure(currentLocation);
         giveLocation();
       }
     }
 
-    if (inputArray[0] == "gebruik"){
-      console.log('ga wat gebruiken');
-      myInput.value = "";
-    }
-
-    if (inputArray[0] != "ga" && inputArray[0] != "pak" && inputArray[0] != "gebruik" ){
-      feedback.innerHTML = "mogelijke commando's zijn: ga, pak, gebruik en help";
+    if (inputArray[0] != "walk" && inputArray[0] != "pickup" && inputArray[0] != "use" && "please" && inputArray[0] != "pickup" ){
+      feedback.innerHTML = "Try: walk path ";
       myInput.value = "";
       setTimeout(removeFeedback, 4000);
     }
@@ -118,10 +110,10 @@ function getInput(evt) {
 }
 
 function giveLocation() {
-  divLocation.innerHTML = locations[currentLocation] + " => grid " + currentLocation;
+  divLocation.innerHTML = locations[currentLocation];
   myDescription.innerHTML = descriptions[currentLocation];
   imageLocation.src = "media/" + images[currentLocation];
-  myDirections = "mogelijke richtingen zijn: ";
+  myDirections = "Available option(s): ";
   for (let i = 0; i < directions[currentLocation].length; i++) {
     myDirections += "<li>" + directions[currentLocation][i] + "</li>";
   }
@@ -129,14 +121,14 @@ function giveLocation() {
   myPossibilities.innerHTML = myDirections;
 
   if(inventoryTreasures.length > 0){
-    myInventory.innerHTML = "<h2>These are your treasures</h2>";
+    myInventory.innerHTML = "<h4>You now have a </h4>";
     inventoryTreasures.forEach(showInventory);
     function showInventory(item , index){
-      myInventory.innerHTML += "<li>" + item + "</li>";
+      myInventory.innerHTML += "<strong>" + item;
     }
   }
   else {
-    myInventory.innerHTML = "uw inventory is leeg";
+    myInventory.innerHTML = "<br>Extra: find a cool toy. ";
   }
 
   // moet misschien weg
@@ -171,7 +163,7 @@ function checkTreasure(currentLocation){
   if(typeof treasures[currentLocation] != "undefined" && treasures[currentLocation] != ""){
     console.log(treasures[currentLocation]);
     treasure.src = "treasures/" + treasureImages[currentLocation];
-    let treasureText = "<br><h3>There are collectables in this room to find <br> " + treasures [currentLocation] + "</h4><br>";
+    let treasureText = "<br><h3>You can now pickup:<br> " + treasures [currentLocation] + "</h4><br>";
     treasureAanwezig = true;
     return treasureText;
   }
