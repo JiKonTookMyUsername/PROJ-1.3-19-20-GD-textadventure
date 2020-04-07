@@ -21,15 +21,23 @@ locations[7] = "klaslokaal";
 locations[8] = "examenlokaal";
 
 images = [];
-images[0] = "room0.jpg";
+images[0] = "room0.png";
 images[1] = "room1.jpg";
 images[2] = "room2.jpg";
 images[3] = "room3.jpg";
-images[4] = "room4.jpg";
+images[4] = "room_4.png";
 images[5] = "room5.jpg";
 images[6] = "room6.jpg";
 images[7] = "room7.jpg";
 images[8] = "room8.jpg";
+
+treasures = [];
+treasures[1] = "Treasure chest";
+
+treasureImages = [];
+treasureImages[1] = "chest.png";
+
+inventoryTreasures = [];
 
 directions = [];
 directions[0] = ["oost"];
@@ -52,16 +60,6 @@ descriptions[5] = "u staat in het medialab. Hier kan geexperimenteerd worden met
 descriptions[6] = "u staat bij de toiletten";
 descriptions[7] = "u staat in een klaslokaal. De tafels staan recht achter elkaar en voorin is een projector en een smartboard";
 descriptions[8] = "u staat in het examenlokaal. Hier zijn de vierdejaars studenten bezig met het voorbereiden van hun examen";
-
-treasures = [];
-treasures[1] = "Maringe Toy 1";
-treasure[3] = "Marine Toy 2";
-
-treasureImages = [];
-treasureImages[1] = "MarineToy1.png";
-treasureImages[3] = "MarineToy2.png";
-
-inventoryTreasures=[];
 
 myInput.addEventListener('keydown', getInput, false);
 
@@ -97,6 +95,12 @@ function getInput(evt) {
     if (inputArray[0] == "pak") {
       console.log('ga wat pakken');
       myInput.value = "";
+      if (treasureAanwezig){
+        console.log('treasure collected')
+    
+        pakTreasure(currentLocation);
+        giveLocation();
+      }
     }
 
     if (inputArray[0] == "gebruik"){
@@ -113,41 +117,7 @@ function getInput(evt) {
   }
 }
 
-// if(inputArray[0] == "pak") {
-//   console.log('ga wat pakken');
-//   myInput.value = "";
-//   if (treasureAanwezig){
-//     console.log('schat gepakt');
-//     pakTreasure(currentLocation);
-//     giveLocation();
-//   }
-// }
-//
-// function pakTreasure(currentLocation){
-//   inventoryTreasures.push(treasure[currentLocation]);
-//   treasures[currentLocation] = "";
-//   giveLocation();
-// }
-//
-// function checkTreasure(currentLocation){
-//   if(typeof treasures[currentLocation] != "undefind" && treasures[currentLocation] != ""){
-//     console.log(treasures[currentLocation]);
-//     treasure.src = "treasures/" + treasureImages[currentLocation];
-//     let treasureText = "<br><h4>In deze ruimte is een voorwerp aanwezig: " + treasures[currentLocation] + "</h4><br>";
-//     treasureAanwezig = true;
-//     return treasureText;
-//   }
-//   else{
-//     treasure.src = "";
-//     treasureAanwezig = false;
-//     return "";
-//   }
-// }
-
-
-
 function giveLocation() {
-  showTreasure(currentLocation);
   divLocation.innerHTML = locations[currentLocation] + " => grid " + currentLocation;
   myDescription.innerHTML = descriptions[currentLocation];
   imageLocation.src = "media/" + images[currentLocation];
@@ -155,38 +125,72 @@ function giveLocation() {
   for (let i = 0; i < directions[currentLocation].length; i++) {
     myDirections += "<li>" + directions[currentLocation][i] + "</li>";
   }
-
-
   myDirections += checkTreasure(currentLocation);
   myPossibilities.innerHTML = myDirections;
 
-  // inventory checker
   if(inventoryTreasures.length > 0){
-    myInventory.innerHTML = "These are your collectables: ";
+    myInventory.innerHTML = "<h2>These are your treasures</h2>";
     inventoryTreasures.forEach(showInventory);
-    function showInventory(item , index ){
+    function showInventory(item , index){
       myInventory.innerHTML += "<li>" + item + "</li>";
     }
   }
   else {
-    myInventory.innerHTML = "You have no collectables :(";
+    myInventory.innerHTML = "uw inventory is leeg";
   }
 
+  // moet misschien weg
+  showTreasure(currentLocation);
+  
 }
 
 
-function showTreasure(currentLocation){
-  if(typeof treasures[currentLocation] != "undefined"){
+// added if statement 
+// if (inputArray[0] == "pak") {
+//   console.log('Collect something');
+//   myInput.value ="";
+//   if (treasureAanwezig){
+//     console.log('treasure collected')
+
+//     pakTreasure(currentLocation);
+//     giveLocation();
+//   }
+// }
+
+
+// added function
+function pakTreasure(currentLocation){
+  inventoryTreasures.push(treasures[currentLocation]);
+  treasures[currentLocation] = "";
+  giveLocation() ;
+}
+
+
+// added function with a if-else statement
+function checkTreasure(currentLocation){
+  if(typeof treasures[currentLocation] != "undefined" && treasures[currentLocation] != ""){
     console.log(treasures[currentLocation]);
     treasure.src = "treasures/" + treasureImages[currentLocation];
+    let treasureText = "<br><h3>There are collectables in this room to find <br> " + treasures [currentLocation] + "</h4><br>";
+    treasureAanwezig = true;
+    return treasureText;
+  }
+  else {
+    treasure.src = "";
+    treasureAanwezig = false;
+    return "";
   }
 }
 
 
 
-
-
-
+// added function:
+function showTreasure(currentLocation){
+  if(typeof treasures[currentLocation] != "undefined") {
+    console.log(treasure[currentLocation]);
+    treasure.src = "treasures/" + treasureImages [currentLocation]; 
+  }
+}
 
 function removeFeedback() {
   feedback.innerHTML = "";

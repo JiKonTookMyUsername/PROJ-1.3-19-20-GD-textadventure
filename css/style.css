@@ -1,27 +1,26 @@
 body{
-  background-color: white;
+  background-color: black;
 }
 
 .container{
   position: relative;
   width: 600px;
   margin: auto;
-  background-color: aliceblue;
+  background-color: white;
   padding: 20px;
-  border: blue 3px solid;
+  border: red 3px solid;
   border-radius: 10px;
 }
-
-#feedback{
-  background-color: yellow;
-  color: red;
-  font-size: 30px;
-  font-weight: bold;
-}
-
 
 .treasure{
   position: absolute;
   left: 50px;
   top: 150px;
+}
+
+#feedback{
+  background-color: black;
+  color: red;
+  font-size: 30px;
+  font-weight: bold;
 }
