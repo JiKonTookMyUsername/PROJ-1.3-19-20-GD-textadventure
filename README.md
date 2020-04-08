@@ -10,4 +10,4 @@ gamedeveloper - Jim Koning
 
 
    [LiveDemo]: <http://25800.hosts2.ma-cloud.nl/bewijzenmap/PROJ-1.3-19-20-GD-textadventure/>
-   [Map]:<docs/map.png>
+   [Quest map including spoilers]:<docs/map.png>
