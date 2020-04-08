@@ -5,7 +5,7 @@ gamedeveloper - Jim Koning
 | Product  | Link |
 | ------ |  ------ |
 | Link naar live demo| [LiveDemo]
-| Plattegrond van jouw labyrinth            | [Map]
+| Plattegrond van jouw labyrinth            | [Quest map including spoilers]
 |<img width=500/>|<img width=300/>|
 
 
