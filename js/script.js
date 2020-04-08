@@ -42,8 +42,8 @@ directions[0]
 directions[1] = ["path"];
 directions[2] = ["path"];
 directions[3] = ["path"];
-directions[4] = ["backward", "forward"];
-directions[5] = ["backward", "forward"];
+directions[4] = ["backwards", "forwards"];
+directions[5] = ["backwards", "forwards"];
 directions[6] = ["pinky"];
 
 
